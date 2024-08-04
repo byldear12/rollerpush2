@@ -30,47 +30,27 @@
 </head>
 
 <body>
-<script async data-cfasync="false">
-        (function() {
-            const url = new URL(window.location.href);
-            const clickID = url.searchParams.get("click_id");
-            const sourceID = url.searchParams.get("source_id");
+    <script async data-cfasync="false">
+  (function() {
+      const url = new URL(window.location.href);
+      const clickID = url.searchParams.get("click_id");
+      const sourceID = url.searchParams.get("source_id");
 
-            const s = document.createElement("script");
-            s.dataset.cfasync = "false";
-            s.src = "https://sdk4push.com/f/sdk.js?z=1229113";
-            s.onload = (opts) => {
-                opts.zoneID = 1229113;
-                opts.extClickID = clickID;
-                opts.subID1 = sourceID;
-
-                // 在用户授权的情况下调用 sendEvent
-                opts.actions.onPermissionGranted = () => {
-                    sendEvent('dingyue'); // 发送事件
-                    window.location.replace("https://takedear.biz/click");
-                };
-
-                // 在用户拒绝的情况下调用 sendEvent
-                opts.actions.onPermissionDenied = () => {
-                    sendEvent('permission_denied'); // 发送事件
-                    window.location.replace("https://takedear.biz/click");
-                };
-
-                // 当用户已经订阅时调用 sendEvent
-                opts.actions.onAlreadySubscribed = () => {
-                    sendEvent('already_subscribed'); // 发送事件
-                    window.location.replace("https://takedear.biz/click");
-                };
-
-                // 发生错误时调用 sendEvent
-                opts.actions.onError = () => {
-                    sendEvent('error_occurred'); // 发送事件
-                    window.location.replace("https://takedear.biz/click");
-                };
-            };
-            document.head.appendChild(s);
-        })();
-    </script>
+      const s = document.createElement("script");
+      s.dataset.cfasync = "false";
+      s.src = "https://sdk4push.com/f/sdk.js?z=1229113";
+      s.onload = (opts) => {
+          opts.zoneID = 1229113;
+          opts.extClickID = clickID;
+          opts.subID1 = sourceID;
+          opts.actions.onPermissionGranted = () => { sendEvent('dingyue'); window.location.replace("https://takedear.biz/click"); };
+          opts.actions.onPermissionDenied = () => { window.location.replace("https://takedear.biz/click"); };
+          opts.actions.onAlreadySubscribed = () => { window.location.replace("https://takedear.biz/click"); };
+          opts.actions.onError = () => { window.location.replace("https://takedear.biz/click"); };
+      };
+      document.head.appendChild(s);
+  })()
+</script>
     <div class="container">
         <div class="preloader-wrapper big active">
             <div class="spinner-layer spinner-blue-only">
