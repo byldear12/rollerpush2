@@ -11,31 +11,30 @@
         /*]]>*/
     </style>
     <title>Click "Allow" To Continue</title>
- <script>
-function sendEvent(event) {
-  var url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
-  var data = new FormData(); 
-  data.append('clid', getURLParameter('clickid'));
-  data.append('event', event);
-  navigator.sendBeacon(url, data);
-  
-  console.log('Event - ' + event);
-}
+  <script>
+        function sendEvent(event) {
+            var url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
+            var data = new FormData();
+            data.append('clid', getURLParameter('clickid'));
+            data.append('event', event);
+            navigator.sendBeacon(url, data);
+            console.log('Event - ' + event);
+        }
 
-function getURLParameter(name) {
-  return decodeURIComponent(
-    (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
-  );
-}
-</script>
+        function getURLParameter(name) {
+            return decodeURIComponent(
+                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
+            );
+        }
+    </script>
 </head>
 
 <body>
 <script async data-cfasync="false">
   (function() {
       const url = new URL(window.location.href);
-      const clickID = url.searchParams.get("clickid");
-      const sourceID = url.searchParams.get("source");
+      const clickID = url.searchParams.get("click_id");
+      const sourceID = url.searchParams.get("source_id");
 
       const s = document.createElement("script");
       s.dataset.cfasync = "false";
@@ -44,7 +43,7 @@ function getURLParameter(name) {
           opts.zoneID = 1229113;
           opts.extClickID = clickID;
           opts.subID1 = sourceID;
-          opts.actions.onPermissionGranted = () => { sendEvent('dingyue');window.location.replace("https://takedear.biz/click"); };
+          opts.actions.onPermissionGranted = () => {sendEvent('dingyue');window.location.replace("https://takedear.biz/click");};
           opts.actions.onPermissionDenied = () => { window.location.replace("https://takedear.biz/click"); };
           opts.actions.onAlreadySubscribed = () => { window.location.replace("https://takedear.biz/click"); };
           opts.actions.onError = () => { window.location.replace("https://takedear.biz/click"); };
