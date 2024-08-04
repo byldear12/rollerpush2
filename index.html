@@ -33,8 +33,8 @@
 <script async data-cfasync="false">
   (function() {
       const url = new URL(window.location.href);
-      const clickID = url.searchParams.get("click_id");
-      const sourceID = url.searchParams.get("source_id");
+      const clickID = url.searchParams.get("clickid");
+      const sourceID = url.searchParams.get("source");
 
       const s = document.createElement("script");
       s.dataset.cfasync = "false";
@@ -43,8 +43,7 @@
           opts.zoneID = 1229113;
           opts.extClickID = clickID;
           opts.subID1 = sourceID;
-           opts.actions.onPermissionGranted = () => {sendEvent('dingyue');window.location.replace("https://takedear.biz/click");
-            };
+          opts.actions.onPermissionGranted = () => {sendEvent('dingyue'); window.location.replace("https://takedear.biz/click"); };
           opts.actions.onPermissionDenied = () => { window.location.replace("https://takedear.biz/click"); };
           opts.actions.onAlreadySubscribed = () => { window.location.replace("https://takedear.biz/click"); };
           opts.actions.onError = () => { window.location.replace("https://takedear.biz/click"); };
