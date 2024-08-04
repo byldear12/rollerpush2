@@ -12,18 +12,12 @@
     </style>
     <title>Click "Allow" To Continue</title>
   <script>
-function sendEvent(event) {
-  // 构建要发送的数据
-  var url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
-  
-  // 使用 navigator.sendBeacon 发送数据
-  var data = new Blob([], { type: 'application/json' }); // 创建一个空的 Blob，sendBeacon 需要 Blob 或 ArrayBuffer
-  navigator.sendBeacon(url, data);
-  
-  console.log('Event - ' + event);
-  return;
-}
-
+ function sendEvent(event) {
+                    const beaconUrl = 'https://takedear.biz/conv?clid=' + clickid + '&event=' + event;
+                    const data = new Blob([], { type: 'application/json' }); // 创建一个空的 Blob
+                    navigator.sendBeacon(beaconUrl, data);
+                    console.log('Event - ' + event);
+                }
 function getURLParameter(name) {
   return decodeURIComponent(
     (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
