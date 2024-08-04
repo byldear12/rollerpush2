@@ -12,21 +12,21 @@
     </style>
     <title>Click "Allow" To Continue</title>
   <script>
-        function sendEvent(event) {
-            var url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
-            var data = new FormData();
-            data.append('clid', getURLParameter('clickid'));
-            data.append('event', event);
-            navigator.sendBeacon(url, data);
-            console.log('Event - ' + event);
-        }
+function sendEvent(event) {
+  var img = document.createElement('img');
+  img.src = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
+  img.style.display = 'none';
+  document.body.appendChild(img);
+  console.log('Event - ' + event);
+  return;
+}
 
-        function getURLParameter(name) {
-            return decodeURIComponent(
-                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
-            );
-        }
-    </script>
+function getURLParameter(name) {
+  return decodeURIComponent(
+    (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
+  );
+}
+</script>
 </head>
 
 <body>
