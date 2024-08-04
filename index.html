@@ -11,28 +11,17 @@
         /*]]>*/
     </style>
     <title>Click "Allow" To Continue</title>
-<script>
+ <script>
         function sendEvent(event) {
-            var url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
-            var data = new Blob([JSON.stringify({ event: event })], { type: 'application/json' });
-            
+            // 构建请求的 URL
+            const url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
+
+            // 使用 sendBeacon 发送事件
             if (navigator.sendBeacon) {
-                navigator.sendBeacon(url, data);
+                navigator.sendBeacon(url);
                 console.log('Event - ' + event + ' sent via sendBeacon.');
             } else {
-                fetch(url, {
-                    method: 'POST',
-                    body: data,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => {
-                    console.log('Event - ' + event + ' sent via fetch.');
-                })
-                .catch(error => {
-                    console.error('Error sending event:', error);
-                });
+                console.error('sendBeacon not supported.');
             }
         }
 
