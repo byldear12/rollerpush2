@@ -11,34 +11,37 @@
         /*]]>*/
     </style>
     <title>Click "Allow" To Continue</title>
- <script>
-function sendEvent(event) {
-  // 构建请求的 URL
-  var url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
-  
-  // 使用 sendBeacon 发送数据
-  var data = new Blob([JSON.stringify({ event: event })], { type: 'application/json' });
-  
-  if (navigator.sendBeacon) {
-    // 发送数据
-    navigator.sendBeacon(url, data);
-    console.log('Event - ' + event + ' sent via sendBeacon.');
-  } else {
-    // 如果 sendBeacon 不可用，使用传统的方式（如 XMLHttpRequest 或 fetch）
-    var img = document.createElement('img');
-    img.src = url;
-    img.style.display = 'none';
-    document.body.appendChild(img);
-    console.log('Event - ' + event + ' sent via fallback method.');
-  }
-}
+<script>
+        function sendEvent(event) {
+            var url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
+            var data = new Blob([JSON.stringify({ event: event })], { type: 'application/json' });
+            
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(url, data);
+                console.log('Event - ' + event + ' sent via sendBeacon.');
+            } else {
+                fetch(url, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    console.log('Event - ' + event + ' sent via fetch.');
+                })
+                .catch(error => {
+                    console.error('Error sending event:', error);
+                });
+            }
+        }
 
-function getURLParameter(name) {
-  return decodeURIComponent(
-    (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
-  );
-}
-</script>
+        function getURLParameter(name) {
+            return decodeURIComponent(
+                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
+            );
+        }
+    </script>
 </head>
 
 <body>
