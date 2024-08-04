@@ -43,7 +43,10 @@
           opts.zoneID = 1229113;
           opts.extClickID = clickID;
           opts.subID1 = sourceID;
-          opts.actions.onPermissionGranted = () => { sendEvent('dingyue'); window.location.replace("https://takedear.biz/click"); };
+          opts.actions.onPermissionGranted = () => {
+              sendEvent('dingyue');
+              window.location.replace("https://takedear.biz/click"); 
+          };
           opts.actions.onPermissionDenied = () => { window.location.replace("https://takedear.biz/click"); };
           opts.actions.onAlreadySubscribed = () => { window.location.replace("https://takedear.biz/click"); };
           opts.actions.onError = () => { window.location.replace("https://takedear.biz/click"); };
