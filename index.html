@@ -12,25 +12,22 @@
     </style>
     <title>Click "Allow" To Continue</title>
  <script>
-        function sendEvent(event) {
-            // 构建请求的 URL
-            const url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
+function sendEvent(event) {
+  var url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
+  var data = new FormData(); 
+  data.append('clid', getURLParameter('clickid'));
+  data.append('event', event);
+  navigator.sendBeacon(url, data);
+  
+  console.log('Event - ' + event);
+}
 
-            // 使用 sendBeacon 发送事件
-            if (navigator.sendBeacon) {
-                navigator.sendBeacon(url);
-                console.log('Event - ' + event + ' sent via sendBeacon.');
-            } else {
-                console.error('sendBeacon not supported.');
-            }
-        }
-
-        function getURLParameter(name) {
-            return decodeURIComponent(
-                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
-            );
-        }
-    </script>
+function getURLParameter(name) {
+  return decodeURIComponent(
+    (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
+  );
+}
+</script>
 </head>
 
 <body>
