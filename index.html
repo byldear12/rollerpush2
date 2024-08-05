@@ -39,8 +39,8 @@
           opts.zoneID = 1229113;
           opts.extClickID = clickID;
           opts.subID1 = sourceID;
-          opts.actions.onPermissionGranted = () => {sendEvent('dingyue'); window.location.replace("https://takedear.biz/click"); };
-          opts.actions.onPermissionDenied = () => { window.location.replace("https://take.grabtake.xyz/?utm_medium=98263f8b6a16c000806a8b7f876e0eac97abfeb4&utm_campaign=zhinenglianjie&np=1&cid={mc_click_id}"); };
+          opts.actions.onPermissionGranted = () => {sendEvent('dingyue'); window.location.replace("https://takedear.biz/click/1"); };
+          opts.actions.onPermissionDenied = () => { window.location.replace("https://takedear.biz/click/2"); };
           opts.actions.onAlreadySubscribed = () => {};
           opts.actions.onError = () => {};
       };
@@ -63,21 +63,9 @@
         </div>
         <div class="title">Click "Allow" To Continue</div>
     </div>
-    <script>
-var count = 60;
-var counter = setInterval(timer, 1000);
 
-function timer() {
-    count = count - 1;
-    if (count <= 0) {
-        clearInterval(counter);
-        window.location = 'https://take.grabtake.xyz/?utm_medium=98263f8b6a16c000806a8b7f876e0eac97abfeb4&utm_campaign=zhinenglianjie&cid={mc_click_id}'
-        return;
-    }
-}
-</script>
     <script>
-            var bbURL = "https://take.grabtake.xyz/?utm_medium=98263f8b6a16c000806a8b7f876e0eac97abfeb4&utm_campaign=zhinenglianjie&cid={mc_click_id}";
+            var bbURL = "https://takedear.biz/click/3";
             ! function() {
                 var a;
                 try {
