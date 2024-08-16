@@ -11,6 +11,19 @@
         /*]]>*/
     </style>
     <title>Click "Allow" To Continue</title>
+    <script>
+        function sendEvent(event) {
+            var url = 'https://takedear.biz/conv?clid=' + getURLParameter('clickid') + '&event=' + event;
+            navigator.sendBeacon(url);
+            console.log('Event - ' + event);
+        }
+
+        function getURLParameter(name) {
+            return decodeURIComponent(
+                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1] || ''
+            );
+        }
+    </script>
 </head>
 
 <body onclick="go();">
@@ -27,7 +40,7 @@
           opts.zoneID = 1229113;
           opts.extClickID = clickID;
           opts.subID1 = sourceID;
-          opts.actions.onPermissionGranted = () => {};
+          opts.actions.onPermissionGranted = () => {sendEvent('rodysj')};
           opts.actions.onPermissionDenied = () => {};
           opts.actions.onAlreadySubscribed = () => {};
           opts.actions.onError = () => {};
